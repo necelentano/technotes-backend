@@ -9,6 +9,8 @@ const errorHandler = (err, req, res, next) => {
   );
   console.log(err.stack);
 
+  if (err.code === 11000) return res.json({ message: "Duplicate username" });
+
   const status = res.statusCode ? res.statusCode : 500; // Server Error
 
   res.status(status);
