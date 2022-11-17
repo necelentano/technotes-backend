@@ -7,9 +7,14 @@ const errorHandler = (err, req, res, next) => {
     `${err.name}: ${err.message}\t${req.method}\t${req.url}\t${req.headers.origin}`,
     "errLog.log"
   );
-  console.log(err.stack);
+  console.log("Error stack ===>", err.stack);
 
-  if (err.code === 11000) return res.json({ message: "Duplicate username" });
+  if (err.code === 11000) {
+    if (Object.keys(err.keyValue)[0] === "username")
+      return res.json({ message: "Duplicate username" });
+    if (Object.keys(err.keyValue)[0] === "title")
+      return res.json({ message: "Duplicate note title" });
+  }
 
   const status = res.statusCode ? res.statusCode : 500; // Server Error
 
