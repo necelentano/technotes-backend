@@ -1,4 +1,5 @@
 require("dotenv").config();
+// require("express-async-errors") // applies anywhere in app and we don't need to use asyncHandler (express-async-handler package) in controlers
 const express = require("express");
 const path = require("path");
 const { logger, logEvents } = require("./middleware/logger");
